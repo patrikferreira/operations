@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <input type="text" id="display" disabled>
+
+        <div class="buttons first-row">
+            <button value="AC" id="clear">AC</button>
+            <button value="DEL" id="delete">DEL</button>
+            <button value="%" class="op">%</button>
+            <button value="/" class="op">/</button>
+        </div>
+        <div class="buttons">
+            <button value="7" class="val">7</button>
+            <button value="8" class="val">8</button>
+            <button value="9" class="val">9</button>
+            <button value="*" class="op">x</button>
+        </div>
+        <div class="buttons">
+            <button value="4" class="val">4</button>
+            <button value="5" class="val">5</button>
+            <button value="6" class="val">6</button>
+            <button value="-" class="op">-</button>
+        </div>
+        <div class="buttons">
+            <button value="1" class="val">1</button>
+            <button value="2" class="val">2</button>
+            <button value="3" class="val">3</button>
+            <button value="+" class="op">+</button>
+        </div>
+        <div class="buttons">
+            <button value="0" class="val" id="val-zero">0</button>
+            <button value="." class="val">.</button>
+            <button value="=" id="equation">=</button>
+        </div>
+    </div>
+    <script src="./dist/index.js"></script>
+</body>
+</html>

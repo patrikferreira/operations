@@ -1,0 +1,6 @@
+CRITICAL - 2023-05-19 19:31:41 --> Cannot use object of type stdClass as array
+in APPPATH\Controllers\OperacoesController.php on line 30.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\OperacoesController->add()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OperacoesController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
