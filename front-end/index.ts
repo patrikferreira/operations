@@ -8,7 +8,7 @@ type Op = {
 
 let id = 0;
 let op = 0;
-let valString: string = 0;
+let valString: string = "0";
 let dataAtual: Date = new Date();
 let dia: number = dataAtual.getDate();
 let mes: number = dataAtual.getMonth() + 1;
@@ -50,7 +50,7 @@ opBtn.forEach((val) => {
 equationBtn.addEventListener('click', () => {
     if(output.value === "") return;
     output.value = eval(output.value.replace("%", "/100"));
-    let obj: Op = {id: ++id, nome: `operação: ${++op}`, operacao: valString, resultado: Number(output.value), data: dataFormatada}
+    let obj: Op = {id: ++id, nome: `teste`, operacao: valString, resultado: Number(output.value), data: dataFormatada}
     console.log(obj);
 
     fetch('http://localhost/operacoes/back-end/public/operacoes', {method: 'POST', body: JSON.stringify(obj)}).then(response => response.json()).then((data) => {
@@ -66,3 +66,12 @@ deleteBtn.addEventListener('click', () => {
     output.value = output.value.slice(0, -1);
 })
 
+async function getOperations() {
+    const response = await fetch('http://localhost/operacoes/back-end/public/operacoes');
+    const data: Array<Op> = await response.json();
+    data.forEach(item => {
+        console.log(item)
+    })
+}
+
+getOperations()
