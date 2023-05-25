@@ -10,17 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let op = 0;
 let valString = "0";
-let dataAtual = new Date();
-let dia = dataAtual.getDate();
-let mes = dataAtual.getMonth() + 1;
-let ano = dataAtual.getFullYear();
-let dataFormatada = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${ano}`;
 const output = document.getElementById('display');
 const valBtn = document.querySelectorAll('.val');
 const opBtn = document.querySelectorAll('.op');
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 const equationBtn = document.getElementById('equation');
+const table = document.getElementById('myTable');
 valBtn.forEach((val) => {
     val.addEventListener('click', () => {
         output.value += val.value;
@@ -49,6 +45,7 @@ equationBtn.addEventListener('click', () => {
     fetch('http://localhost/operacoes/back-end/public/operacoes', { method: 'POST', body: JSON.stringify(obj) }).then(response => response.json()).then((data) => {
         console.log(data);
     }).then(() => {
+        table.innerHTML = '';
         getOperations();
     });
 });
@@ -62,7 +59,21 @@ function getOperations() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch('http://localhost/operacoes/back-end/public/operacoes');
         const data = yield response.json();
-        const table = document.getElementById('myTable');
+        const tableRow = document.createElement('tr');
+        tableRow.classList.add('row');
+        const thNome = document.createElement('th');
+        thNome.innerText = `Nome`;
+        const thOperacao = document.createElement('th');
+        thOperacao.innerText = `Operação`;
+        const thResultado = document.createElement('th');
+        thResultado.innerText = `Resultado`;
+        const thData = document.createElement('th');
+        thData.innerText = `Data`;
+        table.appendChild(tableRow);
+        tableRow.appendChild(thNome);
+        tableRow.appendChild(thOperacao);
+        tableRow.appendChild(thResultado);
+        tableRow.appendChild(thData);
         data.forEach(item => {
             const tableRow = document.createElement('tr');
             // nome

@@ -6,12 +6,6 @@ type Op = {
 
 let op = 0;
 let valString: string = "0";
-let dataAtual: Date = new Date();
-let dia: number = dataAtual.getDate();
-let mes: number = dataAtual.getMonth() + 1;
-let ano: number = dataAtual.getFullYear();
-
-let dataFormatada: string = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${ano}`;
 
 const output: HTMLInputElement = document.getElementById('display') as HTMLInputElement;
 const valBtn: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.val');
@@ -19,6 +13,7 @@ const opBtn: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.op');
 const clearBtn: HTMLButtonElement = document.getElementById('clear') as HTMLButtonElement;
 const deleteBtn: HTMLButtonElement = document.getElementById('delete') as HTMLButtonElement;
 const equationBtn: HTMLButtonElement = document.getElementById('equation') as HTMLButtonElement;
+const table: HTMLTableElement = document.getElementById('myTable') as HTMLTableElement;
 
 valBtn.forEach((val) => {
     val.addEventListener('click', () => {
@@ -49,6 +44,7 @@ equationBtn.addEventListener('click', () => {
     fetch('http://localhost/operacoes/back-end/public/operacoes', {method: 'POST', body: JSON.stringify(obj)}).then(response => response.json()).then((data) => {
         console.log(data)
     }).then(() => {
+        table.innerHTML = '';
         getOperations()
     })
 })
@@ -65,7 +61,22 @@ async function getOperations() {
     const response = await fetch('http://localhost/operacoes/back-end/public/operacoes');
     const data: Array<Op> = await response.json();
 
-    const table: HTMLTableElement = document.getElementById('myTable') as HTMLTableElement;
+    const tableRow = document.createElement('tr');
+    tableRow.classList.add('row');
+    const thNome = document.createElement('th');
+    thNome.innerText = `Nome`;
+    const thOperacao = document.createElement('th');
+    thOperacao.innerText = `Operação`;
+    const thResultado = document.createElement('th');
+    thResultado.innerText = `Resultado`
+    const thData = document.createElement('th');
+    thData.innerText = `Data`
+
+    table.appendChild(tableRow);
+    tableRow.appendChild(thNome);
+    tableRow.appendChild(thOperacao);
+    tableRow.appendChild(thResultado);
+    tableRow.appendChild(thData);
 
     data.forEach(item => {
         const tableRow = document.createElement('tr');
@@ -94,5 +105,6 @@ async function getOperations() {
 }
 
 getOperations()
+
 
 
