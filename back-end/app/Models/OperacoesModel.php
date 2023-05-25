@@ -17,9 +17,9 @@ class OperacoesModel extends Model
     protected $allowedFields    = ['id', 'nome', 'operacao', 'resultado', 'data'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
+    protected $createdField  = 'data';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 

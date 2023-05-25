@@ -27,11 +27,9 @@ class OperacoesController extends BaseController
         $operacoes = $this->request->getJSON();
         $model->insert(
             [
-                'id' => $operacoes->id,
                 'nome' => $operacoes->nome,
                 'operacao' => $operacoes->operacao,
-                'resultado' => $operacoes->resultado,
-                'data' => $operacoes->data
+                'resultado' => $operacoes->resultado
               ]
         );
         return $this->response->setJSON(['sucess'=> true, 'data'=> $operacoes]);

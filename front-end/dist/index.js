@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-let id = 0;
 let op = 0;
 let valString = "0";
 let dataAtual = new Date();
@@ -16,7 +15,6 @@ let dia = dataAtual.getDate();
 let mes = dataAtual.getMonth() + 1;
 let ano = dataAtual.getFullYear();
 let dataFormatada = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${ano}`;
-console.log(dataFormatada);
 const output = document.getElementById('display');
 const valBtn = document.querySelectorAll('.val');
 const opBtn = document.querySelectorAll('.op');
@@ -27,8 +25,7 @@ valBtn.forEach((val) => {
     val.addEventListener('click', () => {
         output.value += val.value;
         valString = output.value.toString();
-        let obj = { id: null, nome: null, operacao: valString, resultado: null, data: dataFormatada };
-        console.log(obj);
+        let obj = { nome: null, operacao: valString, resultado: null };
     });
 });
 opBtn.forEach((val) => {
@@ -36,8 +33,7 @@ opBtn.forEach((val) => {
         if (output.value !== "") {
             output.value += val.value;
             valString = output.value.toString();
-            let obj = { id: null, nome: null, operacao: valString, resultado: null, data: dataFormatada };
-            console.log(obj);
+            let obj = { nome: null, operacao: valString, resultado: null };
         }
         else {
             return;
@@ -48,10 +44,12 @@ equationBtn.addEventListener('click', () => {
     if (output.value === "")
         return;
     output.value = eval(output.value.replace("%", "/100"));
-    let obj = { id: ++id, nome: `teste`, operacao: valString, resultado: Number(output.value), data: dataFormatada };
+    let obj = { nome: `teste`, operacao: valString, resultado: Number(output.value) };
     console.log(obj);
     fetch('http://localhost/operacoes/back-end/public/operacoes', { method: 'POST', body: JSON.stringify(obj) }).then(response => response.json()).then((data) => {
         console.log(data);
+    }).then(() => {
+        getOperations();
     });
 });
 clearBtn.addEventListener('click', () => {
@@ -64,8 +62,26 @@ function getOperations() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch('http://localhost/operacoes/back-end/public/operacoes');
         const data = yield response.json();
+        const table = document.getElementById('myTable');
         data.forEach(item => {
-            console.log(item);
+            const tableRow = document.createElement('tr');
+            // nome
+            const itemId = document.createElement('td');
+            itemId.innerText = `${item.nome}`;
+            // operação
+            const itemOp = document.createElement('td');
+            itemOp.innerText = `${item.operacao}`;
+            // resultado
+            const itemResult = document.createElement('td');
+            itemResult.innerText = `${item.resultado}`;
+            // data
+            const itemDate = document.createElement('td');
+            itemDate.innerText = `${item.data}`;
+            table.appendChild(tableRow);
+            tableRow.appendChild(itemId);
+            tableRow.appendChild(itemOp);
+            tableRow.appendChild(itemResult);
+            tableRow.appendChild(itemDate);
         });
     });
 }
