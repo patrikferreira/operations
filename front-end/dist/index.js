@@ -17,11 +17,12 @@ const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 const equationBtn = document.getElementById('equation');
 const table = document.getElementById('myTable');
+const nameUser = prompt('Digite seu nome');
 valBtn.forEach((val) => {
     val.addEventListener('click', () => {
         output.value += val.value;
         valString = output.value.toString();
-        let obj = { nome: null, operacao: valString, resultado: null };
+        let obj = { nome: nameUser, operacao: valString, resultado: null };
     });
 });
 opBtn.forEach((val) => {
@@ -29,7 +30,7 @@ opBtn.forEach((val) => {
         if (output.value !== "") {
             output.value += val.value;
             valString = output.value.toString();
-            let obj = { nome: null, operacao: valString, resultado: null };
+            let obj = { nome: nameUser, operacao: valString, resultado: null };
         }
         else {
             return;
@@ -40,7 +41,7 @@ equationBtn.addEventListener('click', () => {
     if (output.value === "")
         return;
     output.value = eval(output.value.replace("%", "/100"));
-    let obj = { nome: `teste`, operacao: valString, resultado: Number(output.value) };
+    let obj = { nome: nameUser, operacao: valString, resultado: Number(output.value) };
     console.log(obj);
     fetch('http://localhost/operacoes/back-end/public/operacoes', { method: 'POST', body: JSON.stringify(obj) }).then(response => response.json()).then((data) => {
         console.log(data);

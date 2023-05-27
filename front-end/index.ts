@@ -14,12 +14,13 @@ const clearBtn: HTMLButtonElement = document.getElementById('clear') as HTMLButt
 const deleteBtn: HTMLButtonElement = document.getElementById('delete') as HTMLButtonElement;
 const equationBtn: HTMLButtonElement = document.getElementById('equation') as HTMLButtonElement;
 const table: HTMLTableElement = document.getElementById('myTable') as HTMLTableElement;
+const nameUser: string = prompt('Digite seu nome');
 
 valBtn.forEach((val) => {
     val.addEventListener('click', () => {
         output.value += val.value;
         valString = output.value.toString();
-        let obj: Op = {nome: null, operacao: valString, resultado: null}
+        let obj: Op = {nome: nameUser, operacao: valString, resultado: null}
     })
 });
 
@@ -28,7 +29,7 @@ opBtn.forEach((val) => {
         if(output.value !== "") {
             output.value += val.value;
             valString = output.value.toString();
-            let obj: Op = {nome: null, operacao: valString, resultado: null}
+            let obj: Op = {nome: nameUser, operacao: valString, resultado: null}
         } else {
             return;
         }
@@ -38,7 +39,7 @@ opBtn.forEach((val) => {
 equationBtn.addEventListener('click', () => {
     if(output.value === "") return;
     output.value = eval(output.value.replace("%", "/100"));
-    let obj: Op = {nome: `teste`, operacao: valString, resultado: Number(output.value)}
+    let obj: Op = {nome: nameUser, operacao: valString, resultado: Number(output.value)}
     console.log(obj);
 
     fetch('http://localhost/operacoes/back-end/public/operacoes', {method: 'POST', body: JSON.stringify(obj)}).then(response => response.json()).then((data) => {
