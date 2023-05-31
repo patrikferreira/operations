@@ -8,8 +8,75 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- container -->
     <div id="container">
-        <input type="text" id="display" disabled>
+        <div id="header">
+            <div id="insert-user">
+                <input type="text" placeholder="Usuário">
+                <button id="send-user">Iniciar</button>
+            </div>
+
+            <div id="user">
+                <h5>Usuário</h5>
+            </div>
+        </div>
+
+        <div id="calc-div">
+            <div id="calculator">
+                <div id="display"></div>
+
+                <div class="buttons first-row">
+                    <button value="AC" id="clear">AC</button>
+                    <button value="DEL" id="delete">DEL</button>
+                    <button value="%" class="op">%</button>
+                    <button value="/" class="op">/</button>
+                </div>
+                <div class="buttons">
+                    <button value="7" class="val">7</button>
+                    <button value="8" class="val">8</button>
+                    <button value="9" class="val">9</button>
+                    <button value="*" class="op">x</button>
+                </div>
+                <div class="buttons">
+                    <button value="4" class="val">4</button>
+                    <button value="5" class="val">5</button>
+                    <button value="6" class="val">6</button>
+                    <button value="-" class="op">-</button>
+                </div>
+                <div class="buttons">
+                    <button value="1" class="val">1</button>
+                    <button value="2" class="val">2</button>
+                    <button value="3" class="val">3</button>
+                    <button value="+" class="op">+</button>
+                </div>
+                <div class="buttons">
+                    <button value="0" class="val" id="val-zero">0</button>
+                    <button value="." class="val">.</button>
+                    <button value="=" id="equation">=</button>
+                </div>
+            </div>
+
+            <div id="data">
+                <div id="filter">
+                    <input type="text" id="filter-input" placeholder="Filtro">
+                    <select name="" id="">
+                        <option value="front">Front</option>
+                        <option value="back">Back</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- <div id="nameUser">
+        <input type="text" id="name">
+        <button id="btnName">Submit</button>
+    </div>
+    <div id="container">
+        <div id="display"></div>
 
         <div class="buttons first-row">
             <button value="AC" id="clear">AC</button>
@@ -43,10 +110,13 @@
     </div>
 
     <div id="data">
+        <div id="filter">
+            <input type="text" id="filter-input">
+        </div>
         <table id="myTable">
             
         </table>
-    </div>
-    <script src="./dist/index.js"></script>
+    </div> -->
+    <script src="./dist/index.js" type="module"></script>
 </body>
 </html>
