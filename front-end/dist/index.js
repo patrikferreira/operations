@@ -1,15 +1,21 @@
-import User from "./classes/User.js";
-const userInput = document.getElementById('userInput');
-const sendUser = document.getElementById('send-user');
-const userDiv = document.getElementById('user');
-sendUser.addEventListener('click', () => {
-    if (userInput.value !== '') {
-        const newUser = new User(userInput.value);
-        userDiv.innerText = `Usuário: ${newUser.name}`;
-        newUser.setStarted();
-        userInput.value = '';
-    }
-});
+import Calculator from "./classes/Calculator.js";
+function main() {
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('send-user');
+    const userDiv = document.getElementById('user');
+    const divBlock = document.getElementById('block');
+    sendBtn.addEventListener('click', () => {
+        if (userInput.value !== '') {
+            const nameUser = userInput.value;
+            userDiv.innerText = `${nameUser}`;
+            userInput.value = '';
+            divBlock.classList.add('unlock');
+            // calculadora
+            const calculator = new Calculator(nameUser);
+        }
+    });
+}
+main();
 // let calcIsActive = false;
 // const btnName: HTMLButtonElement = document.getElementById('btnName') as HTMLButtonElement;
 // const nameInput: HTMLInputElement = document.getElementById('name') as HTMLInputElement;
