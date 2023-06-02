@@ -57,7 +57,6 @@ export default class Calculator  {
         })
 
         this.clearBtn.addEventListener('click', () => {
-            // this.display.innerText = "";
             Util.clearHtml(this.display)
         })
 
