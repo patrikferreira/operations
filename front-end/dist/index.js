@@ -7,7 +7,7 @@ function main() {
     sendBtn.addEventListener('click', () => {
         if (userInput.value !== '') {
             const nameUser = userInput.value;
-            userDiv.innerText = `${nameUser}`;
+            userDiv.innerText = `${nameUser.charAt(0).toUpperCase() + nameUser.slice(1)}`;
             userInput.value = '';
             divBlock.classList.add('unlock');
             // calculadora

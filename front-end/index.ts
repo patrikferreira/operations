@@ -1,8 +1,6 @@
 import Calculator from "./classes/Calculator.js";
 import Util from "./classes/Util.js";
 
-
-
 function main() {
     const userInput: HTMLInputElement = document.getElementById('userInput') as HTMLInputElement;
     const sendBtn: HTMLButtonElement = document.getElementById('send-user') as HTMLButtonElement;
@@ -13,7 +11,7 @@ function main() {
         
         if(userInput.value !== '') {
             const nameUser = userInput.value;
-            userDiv.innerText = `${nameUser}`
+            userDiv.innerText = `${nameUser.charAt(0).toUpperCase() + nameUser.slice(1)}`
             userInput.value = '';
             divBlock.classList.add('unlock');
 
