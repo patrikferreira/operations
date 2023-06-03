@@ -32,6 +32,8 @@ function main() {
     async function getOperations() {
         const response = await fetch('http://localhost/operacoes/back-end/public/operacoes');
         const data: Array<Op> = await response.json();
+
+        Util.refreshHtmlTh(table)
       
         data.forEach(item => {
             const tableRow = document.createElement('tr');
@@ -47,7 +49,7 @@ function main() {
             const itemResult = document.createElement('td');
             itemResult.innerText = `${item.resultado}`
     
-            // data
+            // dados
             const itemDate = document.createElement('td');
             itemDate.innerText = `${item.data}`
     
@@ -60,10 +62,14 @@ function main() {
 
         // filter
         const filterInput: HTMLInputElement = document.getElementById('filter-input') as HTMLInputElement;
-        const filterOptions: HTMLOptGroupElement = document.getElementById('filter-options') as HTMLOptGroupElement;
+        const filterOptions: HTMLSelectElement = document.getElementById('filter-options') as HTMLSelectElement;
 
         filterInput.addEventListener('keyup', (e) => {
-            atualizarOperations(e.target.value)
+            if(filterOptions.value === 'front') {
+                atualizarOperations(e.target.value)
+            } else {
+                // back
+            }
         })
 
         function atualizarOperations(typedText: string) {
@@ -72,58 +78,14 @@ function main() {
             })
 
             table.innerHTML = ''
-            const tableRow = document.createElement('tr');
-            tableRow.classList.add('row');
-            const thNome = document.createElement('th');
-            thNome.innerText = `Nome`;
-            const thOperacao = document.createElement('th');
-            thOperacao.innerText = `Operação`;
-            const thResultado = document.createElement('th');
-            thResultado.innerText = `Resultado`
-            const thData = document.createElement('th');
-            thData.innerText = `Data`
-        
-            table.appendChild(tableRow);
-            tableRow.appendChild(thNome);
-            tableRow.appendChild(thOperacao);
-            tableRow.appendChild(thResultado);
-            tableRow.appendChild(thData);
+            Util.refreshHtmlTh(table)
 
             filterOperations.forEach(item => {
-                const tableRow = document.createElement('tr');
-                // nome
-                const itemId = document.createElement('td');
-                itemId.innerText = `${item.nome}`;
-        
-                // operação
-                const itemOp = document.createElement('td');
-                itemOp.innerText = `${item.operacao}`
-        
-                // resultado
-                const itemResult = document.createElement('td');
-                itemResult.innerText = `${item.resultado}`
-        
-                // data
-                const itemDate = document.createElement('td');
-                itemDate.innerText = `${item.data}`
-        
-                table.appendChild(tableRow);
-                tableRow.appendChild(itemId);
-                tableRow.appendChild(itemOp);
-                tableRow.appendChild(itemResult);
-                tableRow.appendChild(itemDate); 
+                Util.refreshHtml(table, item)
             })
-
         }
-
-
-    
     }
-    
     getOperations()
-
-    
-
 }
 
 main()

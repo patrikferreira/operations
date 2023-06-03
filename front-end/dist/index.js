@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import Calculator from "./classes/Calculator.js";
+import Util from "./classes/Util.js";
 function main() {
     // user
     const userInput = document.getElementById('userInput');
@@ -29,6 +30,7 @@ function main() {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield fetch('http://localhost/operacoes/back-end/public/operacoes');
             const data = yield response.json();
+            Util.refreshHtmlTh(table);
             data.forEach(item => {
                 const tableRow = document.createElement('tr');
                 // nome
@@ -40,7 +42,7 @@ function main() {
                 // resultado
                 const itemResult = document.createElement('td');
                 itemResult.innerText = `${item.resultado}`;
-                // data
+                // dados
                 const itemDate = document.createElement('td');
                 itemDate.innerText = `${item.data}`;
                 table.appendChild(tableRow);
@@ -53,7 +55,12 @@ function main() {
             const filterInput = document.getElementById('filter-input');
             const filterOptions = document.getElementById('filter-options');
             filterInput.addEventListener('keyup', (e) => {
-                atualizarOperations(e.target.value);
+                if (filterOptions.value === 'front') {
+                    atualizarOperations(e.target.value);
+                }
+                else {
+                    // back
+                }
             });
             function atualizarOperations(typedText) {
                 let filterOperations = data.filter(operation => {
@@ -61,40 +68,9 @@ function main() {
                     return (_a = operation.nome) === null || _a === void 0 ? void 0 : _a.toLowerCase().includes(typedText.toLowerCase());
                 });
                 table.innerHTML = '';
-                const tableRow = document.createElement('tr');
-                tableRow.classList.add('row');
-                const thNome = document.createElement('th');
-                thNome.innerText = `Nome`;
-                const thOperacao = document.createElement('th');
-                thOperacao.innerText = `Operação`;
-                const thResultado = document.createElement('th');
-                thResultado.innerText = `Resultado`;
-                const thData = document.createElement('th');
-                thData.innerText = `Data`;
-                table.appendChild(tableRow);
-                tableRow.appendChild(thNome);
-                tableRow.appendChild(thOperacao);
-                tableRow.appendChild(thResultado);
-                tableRow.appendChild(thData);
+                Util.refreshHtmlTh(table);
                 filterOperations.forEach(item => {
-                    const tableRow = document.createElement('tr');
-                    // nome
-                    const itemId = document.createElement('td');
-                    itemId.innerText = `${item.nome}`;
-                    // operação
-                    const itemOp = document.createElement('td');
-                    itemOp.innerText = `${item.operacao}`;
-                    // resultado
-                    const itemResult = document.createElement('td');
-                    itemResult.innerText = `${item.resultado}`;
-                    // data
-                    const itemDate = document.createElement('td');
-                    itemDate.innerText = `${item.data}`;
-                    table.appendChild(tableRow);
-                    tableRow.appendChild(itemId);
-                    tableRow.appendChild(itemOp);
-                    tableRow.appendChild(itemResult);
-                    tableRow.appendChild(itemDate);
+                    Util.refreshHtml(table, item);
                 });
             }
         });
